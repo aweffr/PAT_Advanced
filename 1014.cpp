@@ -46,17 +46,17 @@ int main()
 	}
 	
 	/*
-	 *	��ģ�� ����N�����У�queue����
+	 *	建模： 建立N个队列（queue）。
 	 *
-	 *	Stage 1: �ʼNM����ֱ�ӽ����С�
-	 *  Stage 2: ��ʱ���ж��ж�����M���ˡ�
-	 *			 ����ÿ�����е�top�˵����ʱ�䣬ȡ���ʱ����̵�pop��
-	 *			 ÿ��popһ���ˣ��ʹ��ⲿ�������¶�һ���˽�����
-	 *	Stage 3: ���ⲿ���������˶������ˣ�ÿ����Ҳ�Ͷ�֪�����Լ������ʱ�䡣
+	 *	Stage 1: 最开始NM个人直接进队列。
+	 *	Stage 2: 此时所有队列都填了M个人。
+	 *	考虑每个队列的top人的完成时间，取完成时间最短的pop。
+	 *	每当pop一个人，就从外部队列里新读一个人进来。
+	 *	Stage 3: 当外部队列所有人都读完了，每个人也就都知道了自己的完成时间。
 	 */
 
-	vector<int> finish_time(K);					/* finish_time */
-	vector<queue<Customer> > queue_vec(N);		/* vector of queues*/
+	vector<int> finish_time(K);                 /* finish_time */
+	vector<queue<Customer> > queue_vec(N);      /* vector of queues*/
 
 	for (int i = 0; i < N && i < K; ++i)
 	{
@@ -84,13 +84,13 @@ int main()
 	}
 
 
-	/* Debug: ��ÿ���˵Ľ���ʱ�� */
-	//for (int i : finish_time)
-	//	cout << i << endl;
+	/* Debug: 看每个人的结束时间 */
+    // for (int i : finish_time)
+    //     cout << i << endl;
 
 	for (int id : quires)
 	{
-		/* ��Ŀ�еĲ�ѯid�� 1 to N�� ����洢�õ��� 0 to N-1 */
+		/* 题目中的查询id是 1 to N， 本题存储用的是 0 to N-1 */
 		int out_min = finish_time.at(id - 1);
 		int in_min = out_min - time.at(id - 1);
 		print_time(in_min, out_min);
