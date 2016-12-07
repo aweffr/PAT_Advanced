@@ -17,6 +17,10 @@ struct Station
     }
 };
 
+// The case I dealed wrongly at the first time:
+// If there is a more cheap station reachable in the next stations. I choose to drive to the cheapest,
+// but the correct method is to just drive the nearest and cheaper.
+
 int main(int argc, char** argv)
 {
     double capacity, destnation, disPerUnit;
